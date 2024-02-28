@@ -27,6 +27,7 @@ default:
 all *ARGS='': \
     (cargo-bloat ARGS) \
     (cargo-cache ARGS) \
+    (cargo-cyclonedx ARGS) \
     (cargo-edit ARGS) \
     (cargo-expand ARGS) \
     (cargo-leptos ARGS) \
@@ -39,14 +40,14 @@ all *ARGS='': \
     (espflash ARGS) \
     (espmonitor ARGS) \
     (flip-link ARGS) \
-    (just ARGS) \
     (ldproxy ARGS) \
     (miniserve ARGS) \
     (probe-rs ARGS) \
     (probe-rs-debugger ARGS) \
     (probe-run ARGS) \
     (trunk ARGS) \
-    (wasm-pack ARGS)
+    (wasm-pack ARGS) \
+    (just ARGS)
 
 # list all currently installed rust binaries
 list:
@@ -59,6 +60,10 @@ cargo-bloat *ARGS='':
 # display/prune cargo's cache
 cargo-cache *ARGS='':
     cargo {{ CHANNEL }} install cargo-cache {{ ARGS }}
+
+# generate SBOM
+cargo-cyclonedx *ARGS='':
+    cargo {{ CHANNEL }} install cargo-cyclonedx {{ ARGS }}
 
 # manage cargo dependencies from the command line
 cargo-edit *ARGS='':

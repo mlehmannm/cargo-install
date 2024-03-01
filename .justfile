@@ -25,6 +25,7 @@ default:
 
 # install/update all
 all *ARGS='': \
+    (cargo-binstall ARGS) \
     (cargo-bloat ARGS) \
     (cargo-cache ARGS) \
     (cargo-cyclonedx ARGS) \
@@ -52,6 +53,10 @@ all *ARGS='': \
 # list all currently installed rust binaries
 list:
     cargo install --list
+
+# low-complexity mechanism for installing rust binaries
+cargo-binstall *ARGS='':
+    cargo {{ CHANNEL }} install cargo-binstall {{ ARGS }}
 
 # find out what takes most of the space in your executable
 cargo-bloat *ARGS='':

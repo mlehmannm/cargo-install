@@ -9,6 +9,9 @@ CHANNEL := ''
 #CHANNEL := '+nightly'
 #CHANNEL := '+1.54'
 
+# extra cargo args
+CARGO_ARGS := '--locked'
+
 # configure log
 export RUST_LOG := 'trace,cargo=warn,hyper=warn,reqwest=warn'
 
@@ -22,6 +25,10 @@ export RUST_BACKTRACE := '1'
 [private]
 default:
     @{{ just_executable() }} --list --unsorted --justfile "{{ justfile() }}"
+
+# list all currently installed rust binaries
+list:
+    cargo {{ CHANNEL }} install --list
 
 # install/update all
 all *ARGS='': \
@@ -48,104 +55,100 @@ all *ARGS='': \
     (probe-run ARGS) \
     (trunk ARGS) \
     (wasm-pack ARGS) \
-    (just ARGS)
-
-# list all currently installed rust binaries
-list:
-    cargo install --list
+    (just ARGS) # should be the last, because it will fail, if it is rebuilt
 
 # low-complexity mechanism for installing rust binaries
 cargo-binstall *ARGS='':
-    cargo {{ CHANNEL }} install cargo-binstall {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} cargo-binstall {{ ARGS }}
 
 # find out what takes most of the space in your executable
 cargo-bloat *ARGS='':
-    cargo {{ CHANNEL }} install cargo-bloat {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} cargo-bloat {{ ARGS }}
 
 # display/prune cargo's cache
 cargo-cache *ARGS='':
-    cargo {{ CHANNEL }} install cargo-cache {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} cargo-cache {{ ARGS }}
 
 # generate SBOM
 cargo-cyclonedx *ARGS='':
-    cargo {{ CHANNEL }} install cargo-cyclonedx {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} cargo-cyclonedx {{ ARGS }}
 
 # manage cargo dependencies from the command line
 cargo-edit *ARGS='':
-    cargo {{ CHANNEL }} install cargo-edit {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} cargo-edit {{ ARGS }}
 
 # show result of macro expansion
 cargo-expand *ARGS='':
-    cargo {{ CHANNEL }} install cargo-expand {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} cargo-expand {{ ARGS }}
 
 # build tool for leptos
 cargo-leptos *ARGS='':
-    cargo {{ CHANNEL }} install cargo-leptos {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} cargo-leptos {{ ARGS }}
 
 # command/task runner
 cargo-make *ARGS='':
-    cargo {{ CHANNEL }} install cargo-make {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} cargo-make {{ ARGS }}
 
 # find and display outdated dependencies
 cargo-outdated *ARGS='':
-    cargo {{ CHANNEL }} install cargo-outdated {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} cargo-outdated {{ ARGS }}
 
 # deploy web-apps on shuttle
 cargo-shuttle *ARGS='':
-    cargo {{ CHANNEL }} install cargo-shuttle {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} cargo-shuttle {{ ARGS }}
 
 # code coverage reporting tool
 cargo-tarpaulin *ARGS='':
-    cargo {{ CHANNEL }} install cargo-tarpaulin {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} cargo-tarpaulin {{ ARGS }}
 
 # simplify building code for the wasm32-wasi target
 cargo-wasi *ARGS='':
-    cargo {{ CHANNEL }} install cargo-wasi {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} cargo-wasi {{ ARGS }}
 
 # runs Cargo commands whenever project's source for change
 cargo-watch *ARGS='':
-    cargo {{ CHANNEL }} install cargo-watch {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} cargo-watch {{ ARGS }}
 
 # serial flasher utilities for espressif devices
 espflash *ARGS='':
-    cargo {{ CHANNEL }} install espflash {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} espflash {{ ARGS }}
 
 # monitoring ESP32/ESP8266 execution
 espmonitor *ARGS='':
-    cargo {{ CHANNEL }} install espmonitor {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} espmonitor {{ ARGS }}
 
 # adds zero-cost stack overflow protection to embedded programs
 flip-link *ARGS='':
-    cargo {{ CHANNEL }} install flip-link {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} flip-link {{ ARGS }}
 
 # command/task runner
 just *ARGS='':
-    cargo {{ CHANNEL }} install just {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} just {{ ARGS }}
 
 # simple tool to forward linker arguments
 ldproxy *ARGS='':
-    cargo {{ CHANNEL }} install ldproxy {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} ldproxy {{ ARGS }}
 
 # serve files and dirs over http
 miniserve *ARGS='':
-    cargo {{ CHANNEL }} install miniserve {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} miniserve {{ ARGS }}
 
 # embedded toolkit
 probe-rs *ARGS='':
-    cargo {{ CHANNEL }} install probe-rs --features cli {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} probe-rs --features cli {{ ARGS }}
 
 # ???
 probe-rs-debugger *ARGS='':
-    cargo {{ CHANNEL }} install probe-rs-debugger {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} probe-rs-debugger {{ ARGS }}
 
 # run firmware on embedded devices
 probe-run *ARGS='':
-    cargo {{ CHANNEL }} install probe-run {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} probe-run {{ ARGS }}
 
 # wasm web application bundler
 trunk *ARGS='':
-    cargo {{ CHANNEL }} install trunk {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} trunk {{ ARGS }}
 
 # rust -> wasm workflow tool
 wasm-pack *ARGS='':
-    cargo {{ CHANNEL }} install wasm-pack {{ ARGS }}
+    cargo {{ CHANNEL }} install {{ CARGO_ARGS }} wasm-pack {{ ARGS }}

@@ -30,8 +30,15 @@ default:
 list:
     cargo {{ CHANNEL }} install --list
 
+# one-stop shopping
+all: rustup install
+
+# update toolchain
+rustup:
+    rustup -v upgrade
+
 # install/update all
-all *ARGS='': \
+install *ARGS='': \
     (cargo-binstall ARGS) \
     (cargo-bloat ARGS) \
     (cargo-cache ARGS) \

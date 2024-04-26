@@ -53,6 +53,7 @@ install *ARGS='': \
     (cargo-tarpaulin ARGS) \
     (cargo-wasi ARGS) \
     (cargo-watch ARGS) \
+    (elf2uf2-rs ARGS) \
     (espflash ARGS) \
     (espmonitor ARGS) \
     (flip-link ARGS) \
@@ -120,6 +121,10 @@ cargo-wasi *ARGS='':
 # runs Cargo commands whenever project's source for change
 cargo-watch *ARGS='':
     -cargo {{ CHANNEL }} install {{ CARGO_ARGS }} cargo-watch {{ ARGS }}
+
+# ELF to UF2 converter
+elf2uf2-rs *ARGS='':
+    -cargo {{ CHANNEL }} install {{ CARGO_ARGS }} elf2uf2-rs {{ ARGS }}
 
 # serial flasher utilities for espressif devices
 espflash *ARGS='':

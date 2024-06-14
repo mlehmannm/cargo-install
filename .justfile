@@ -47,6 +47,7 @@ install *ARGS='': \
     (cargo-edit ARGS) \
     (cargo-expand ARGS) \
     (cargo-leptos ARGS) \
+    (cargo-machete ARGS) \
     (cargo-make ARGS) \
     (cargo-outdated ARGS) \
     (cargo-shuttle ARGS) \
@@ -97,6 +98,10 @@ cargo-expand *ARGS='':
 # build tool for leptos
 cargo-leptos *ARGS='':
     -cargo {{ CHANNEL }} install {{ CARGO_ARGS }} cargo-leptos {{ ARGS }}
+
+# find unused dependencies
+cargo-machete *ARGS='':
+    -cargo {{ CHANNEL }} install {{ CARGO_ARGS }} cargo-machete {{ ARGS }}
 
 # command/task runner
 cargo-make *ARGS='':
@@ -150,9 +155,9 @@ ldproxy *ARGS='':
 miniserve *ARGS='':
     -cargo {{ CHANNEL }} install {{ CARGO_ARGS }} miniserve {{ ARGS }}
 
-# embedded toolkit
+# A collection of on chip debugging tools to communicate with microchips.
 probe-rs *ARGS='':
-    -cargo {{ CHANNEL }} install {{ CARGO_ARGS }} probe-rs --features cli {{ ARGS }}
+    -cargo {{ CHANNEL }} install {{ CARGO_ARGS }} probe-rs-tools {{ ARGS }}
 
 # ???
 probe-rs-debugger *ARGS='':

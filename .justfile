@@ -31,7 +31,7 @@ list:
     cargo {{ CHANNEL }} install --list
 
 # one-stop shopping
-all: rustup install
+all *ARGS='': rustup (install ARGS)
 
 # update toolchain
 rustup:

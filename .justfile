@@ -50,6 +50,7 @@ install *ARGS='': \
     (cargo-machete ARGS) \
     (cargo-make ARGS) \
     (cargo-outdated ARGS) \
+    (cargo-release ARGS) \
     (cargo-shuttle ARGS) \
     (cargo-tarpaulin ARGS) \
     (cargo-wasi ARGS) \
@@ -110,6 +111,10 @@ cargo-make *ARGS='':
 # find and display outdated dependencies
 cargo-outdated *ARGS='':
     -cargo {{ CHANNEL }} install {{ CARGO_ARGS }} cargo-outdated {{ ARGS }}
+
+# make release
+cargo-release *ARGS='':
+    -cargo {{ CHANNEL }} install {{ CARGO_ARGS }} cargo-release {{ ARGS }}
 
 # deploy web-apps on shuttle
 cargo-shuttle *ARGS='':

@@ -61,8 +61,7 @@ install *ARGS='': \
     (flip-link ARGS) \
     (ldproxy ARGS) \
     (miniserve ARGS) \
-    (probe-rs ARGS) \
-    (probe-rs-debugger ARGS) \
+    (probe-rs-tools ARGS) \
     (probe-run ARGS) \
     (trunk ARGS) \
     (wasm-pack ARGS) \
@@ -161,12 +160,8 @@ miniserve *ARGS='':
     -cargo {{ CHANNEL }} install {{ CARGO_ARGS }} miniserve {{ ARGS }}
 
 # A collection of on chip debugging tools to communicate with microchips.
-probe-rs *ARGS='':
+probe-rs-tools *ARGS='':
     -cargo {{ CHANNEL }} install {{ CARGO_ARGS }} probe-rs-tools {{ ARGS }}
-
-# ???
-probe-rs-debugger *ARGS='':
-    -cargo {{ CHANNEL }} install {{ CARGO_ARGS }} probe-rs-debugger {{ ARGS }}
 
 # run firmware on embedded devices
 probe-run *ARGS='':
@@ -179,3 +174,7 @@ trunk *ARGS='':
 # rust -> wasm workflow tool
 wasm-pack *ARGS='':
     -cargo {{ CHANNEL }} install {{ CARGO_ARGS }} wasm-pack {{ ARGS }}
+
+# install prerequisites (probe-rs-tools, wasm-pack)
+install-prereqs:
+    -winget install --id Kitware.CMake
